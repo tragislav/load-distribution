@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { getToken } from '../../api/auth';
+import { useAuth } from '../../hooks/useAuth';
 
 import {
   LoginContainer,
@@ -15,15 +17,16 @@ import {
 import schema from './validation';
 
 function Login() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { signIn } = useAuth();
+
   const [isVisible, setIsVisible] = useState(false);
   const [disable, setDisable] = useState(false);
 
   const { register, handleSubmit, reset } = useForm({
     resolver: yupResolver(schema),
   });
-
-  const username = register('email');
-  const password = register('password');
 
   function getFormData(object) {
     let formData = new FormData();
@@ -34,16 +37,18 @@ function Login() {
   }
 
   const onSubmit = (data) => {
-    // setDisable(true);
-    let form = getFormData(data);
-    for (const value of form.values()) {
-      console.log(value);
-    }
+    setDisable(true);
     getToken(getFormData(data))
-      .then((data) => {
-        console.log(data);
+      .then(({ access_token, roles }) => {
         reset();
-        setDisable(true);
+        setDisable(false);
+        sessionStorage.setItem('token', JSON.stringify(access_token));
+        sessionStorage.setItem('roles', JSON.stringify(roles));
+        signIn({ access_token, roles }, () =>
+          navigate(`/main`, {
+            replace: true,
+          }),
+        );
       })
       .catch((e) => {
         alert(e);
@@ -57,19 +62,13 @@ function Login() {
         <LoginFormTitle>Авторизация</LoginFormTitle>
         <LoginForm onSubmit={handleSubmit(onSubmit)}>
           <LoginFormInput
-            ref={username.ref}
-            name={username.name}
-            onBlur={username.onBlur}
-            onChange={username.onChange}
+            {...register('username')}
             type="email"
             placeholder="Ваш email"
             required
           />
           <LoginFormInput
-            ref={password.ref}
-            name={password.name}
-            onBlur={password.onBlur}
-            onChange={password.onChange}
+            {...register('password')}
             type={isVisible ? 'text' : 'password'}
             placeholder="Ваш Пароль"
             required

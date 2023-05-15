@@ -18,6 +18,14 @@ function MainTable() {
     };
   }, []);
 
+  const columnTypes = useMemo(() => {
+    return {
+      editableColumn: {
+        editable: true,
+      },
+    };
+  }, []);
+
   const autoSizeAll = useCallback((skipHeader) => {
     const allColumnIds = [];
     gridRef.current.columnApi.getColumns().forEach((column) => {
@@ -37,6 +45,7 @@ function MainTable() {
         defaultColDef={defaultColDef}
         rowData={rowData}
         columnDefs={columnDefs}
+        columnTypes={columnTypes}
         onGridReady={onGridReady}
       ></AgGridReact>
     </div>

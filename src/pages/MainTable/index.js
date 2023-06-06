@@ -5,11 +5,14 @@ import 'ag-grid-enterprise';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 
-import { tableHeaders, fakeRowData } from './static';
+import { tableHeaders } from './static';
+import { changeWorkload, getWorkload } from '../../api/load';
+import { useAuth } from '../../hooks/useAuth';
 
 function MainTable() {
   const gridRef = useRef();
-  const [rowData] = useState(fakeRowData);
+  const [rowData, setRowData] = useState(null);
+  const { user } = useAuth();
 
   const [columnDefs] = useState(tableHeaders);
 
@@ -38,15 +41,25 @@ function MainTable() {
   }, []);
 
   const onGridReady = useCallback(() => {
+    // autoSizeAll(false);
+    getWorkload(user.access_token).then((data) => {
+      console.log(data);
+      setRowData(data);
+    });
     autoSizeAll(false);
-  }, [autoSizeAll]);
+  }, [autoSizeAll, user.access_token]);
 
   const onCellEditingStarted = useCallback((event) => {
     console.log('cellEditingStarted');
   }, []);
 
   const onCellEditingStopped = useCallback((event) => {
-    console.log(event.data);
+    changeWorkload(
+      { ...event.data, flowNumber: +event.data.flowNumber },
+      user.access_token,
+    ).then((data) => console.log('GREAT'));
+    // console.log({ ...event.data, flowNumber: +event.data.flowNumber }, 'hello');
+    // console.log(event.data)
     console.log('cellEditingStopped');
   }, []);
 

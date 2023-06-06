@@ -1,6 +1,7 @@
 import { useState, useMemo, useCallback, useRef } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 
+import 'ag-grid-enterprise';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 
@@ -14,6 +15,8 @@ function MainTable() {
 
   const defaultColDef = useMemo(() => {
     return {
+      filter: 'agTextColumnFilter',
+      // floatingFilter: true,
       resizable: true,
     };
   }, []);
@@ -38,6 +41,15 @@ function MainTable() {
     autoSizeAll(false);
   }, [autoSizeAll]);
 
+  const onCellEditingStarted = useCallback((event) => {
+    console.log('cellEditingStarted');
+  }, []);
+
+  const onCellEditingStopped = useCallback((event) => {
+    console.log(event.data);
+    console.log('cellEditingStopped');
+  }, []);
+
   return (
     <div className="ag-theme-alpine" style={{ height: 600 }}>
       <AgGridReact
@@ -47,6 +59,8 @@ function MainTable() {
         columnDefs={columnDefs}
         columnTypes={columnTypes}
         onGridReady={onGridReady}
+        onCellEditingStarted={onCellEditingStarted}
+        onCellEditingStopped={onCellEditingStopped}
       ></AgGridReact>
     </div>
   );

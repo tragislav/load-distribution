@@ -9,12 +9,17 @@ import { tableHeaders } from './static';
 import { changeWorkload, getWorkload } from '../../api/load';
 import { useAuth } from '../../hooks/useAuth';
 import { agGridRu } from '../../assets/agLocalization';
+import ModalButtonCellRenderer from './ButtonCell';
+
+const frameworkComponents = {
+  modalButtonCellRenderer: ModalButtonCellRenderer,
+};
 
 function MainTable() {
-  const gridRef = useRef();
-  const [rowData, setRowData] = useState(null);
   const { user } = useAuth();
 
+  const gridRef = useRef();
+  const [rowData, setRowData] = useState(null);
   const [columnDefs] = useState(tableHeaders);
 
   const defaultColDef = useMemo(() => {
@@ -44,7 +49,6 @@ function MainTable() {
   const onGridReady = useCallback(() => {
     // autoSizeAll(false);
     getWorkload(user.access_token).then((data) => {
-      console.log(data);
       setRowData(data);
     });
     autoSizeAll(false);
@@ -60,8 +64,7 @@ function MainTable() {
         { ...event.data, flowNumber: +event.data.flowNumber },
         user.access_token,
       ).then((data) => console.log('GREAT'));
-      // console.log({ ...event.data, flowNumber: +event.data.flowNumber }, 'hello');
-      // console.log(event.data)
+
       console.log('cellEditingStopped');
     },
     [user.access_token],
@@ -71,6 +74,7 @@ function MainTable() {
     <div className="ag-theme-alpine" style={{ height: 600 }}>
       <AgGridReact
         localeText={agGridRu}
+        frameworkComponents={frameworkComponents}
         ref={gridRef}
         defaultColDef={defaultColDef}
         rowData={rowData}

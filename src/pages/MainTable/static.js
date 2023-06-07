@@ -1,4 +1,12 @@
 export const tableHeaders = [
+  {
+    headerName: 'Действия',
+    field: 'actions',
+    cellRenderer: 'modalButtonCellRenderer',
+    cellRendererParams: {
+      onClick: (params) => params.node.setDataValue('data', params.data),
+    },
+  },
   { field: 'numberPlan', headerName: '№ плана' },
   { field: 'numberSemestr', headerName: 'Семестр' },
   { field: 'studyForm', headerName: 'Форма обучения' },

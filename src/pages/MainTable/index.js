@@ -8,6 +8,7 @@ import 'ag-grid-community/styles/ag-theme-alpine.css';
 import { tableHeaders } from './static';
 import { changeWorkload, getWorkload } from '../../api/load';
 import { useAuth } from '../../hooks/useAuth';
+import { agGridRu } from '../../assets/agLocalization';
 
 function MainTable() {
   const gridRef = useRef();
@@ -53,19 +54,23 @@ function MainTable() {
     console.log('cellEditingStarted');
   }, []);
 
-  const onCellEditingStopped = useCallback((event) => {
-    changeWorkload(
-      { ...event.data, flowNumber: +event.data.flowNumber },
-      user.access_token,
-    ).then((data) => console.log('GREAT'));
-    // console.log({ ...event.data, flowNumber: +event.data.flowNumber }, 'hello');
-    // console.log(event.data)
-    console.log('cellEditingStopped');
-  }, []);
+  const onCellEditingStopped = useCallback(
+    (event) => {
+      changeWorkload(
+        { ...event.data, flowNumber: +event.data.flowNumber },
+        user.access_token,
+      ).then((data) => console.log('GREAT'));
+      // console.log({ ...event.data, flowNumber: +event.data.flowNumber }, 'hello');
+      // console.log(event.data)
+      console.log('cellEditingStopped');
+    },
+    [user.access_token],
+  );
 
   return (
     <div className="ag-theme-alpine" style={{ height: 600 }}>
       <AgGridReact
+        localeText={agGridRu}
         ref={gridRef}
         defaultColDef={defaultColDef}
         rowData={rowData}

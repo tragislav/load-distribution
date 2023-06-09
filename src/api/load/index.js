@@ -15,3 +15,11 @@ export function changeWorkload(row, token) {
     },
   });
 }
+
+export function splitWorkload(array, token) {
+  return loadApi.put('/workload/multiple', array, {
+    headers: {
+      Authorization: 'Bearer ' + token,
+    },
+  });
+}

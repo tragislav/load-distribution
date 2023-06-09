@@ -18,6 +18,7 @@ import {
   ModalHeader,
   ModalMain,
 } from './styled';
+import { transformLabel } from '../../helpers/transformLabel';
 
 const customStyles = {
   content: {
@@ -118,7 +119,7 @@ function MyModal({ data, isOpen, onRequestClose }) {
             if (key === 'id' || typeof data[key] !== 'number') return null;
             return (
               <MainItemInner key={key}>
-                <MainItemInnerTitle>{key}:</MainItemInnerTitle>
+                <MainItemInnerTitle>{transformLabel(key)}:</MainItemInnerTitle>
                 <MainItemInnerText>{data[key]}</MainItemInnerText>
               </MainItemInner>
             );
@@ -130,7 +131,9 @@ function MyModal({ data, isOpen, onRequestClose }) {
               if (key === 'id' || typeof obj[key] !== 'number') return null; // Не отображаем инпут для поля id
               return (
                 <MainItemInner key={key}>
-                  <MainItemInnerTitle>{key}:</MainItemInnerTitle>
+                  <MainItemInnerTitle>
+                    {transformLabel(key)}:
+                  </MainItemInnerTitle>
                   {typeof obj[key] === 'number' ? (
                     <MainItemInnerInput
                       type="number"

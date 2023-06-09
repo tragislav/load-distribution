@@ -1,0 +1,136 @@
+.flexContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.flexItem {
+  margin-right: 20px;
+}
+
+.flexItemInner {
+  display: flex;
+  justify-content: space-between;
+  height: 40px;
+  margin: 5px 0;
+}
+
+.itemInnerTitle {
+  font-family: 'Montserrat';
+  padding-top: 10px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #434c63;
+  padding-right: 10px;
+}
+
+.itemInnerText {
+  font-family: 'Montserrat';
+  padding-top: 10px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #282c35;
+}
+
+.itemInnerInput {
+  width: 182px;
+  padding-left: 15px;
+}
+
+/* .itemInnerInput:hover:enabled {
+  box-shadow: 0px 17px 15px -11px rgba(67, 76, 99, 0.2);
+  cursor: pointer;
+  font-weight: 500;
+} */
+
+.createObjectsWrapper {
+  display: flex;
+  justify-content: flex-start;
+  height: 40px;
+}
+
+.createObjectInput {
+  padding-left: 15px;
+  width: 182px;
+  margin-right: 20px;
+}
+
+.createObjectBtn:disabled {
+  color: #808080;
+  background: #ededed;
+}
+
+.createObjectBtn:hover:enabled {
+  box-shadow: 0px 17px 15px -11px rgba(67, 76, 99, 0.2);
+  cursor: pointer;
+  font-weight: 400;
+  background: #373e51;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modalCloseBtn:hover:enabled {
+  box-shadow: 0px 17px 15px -11px rgba(67, 76, 99, 0.2);
+  cursor: pointer;
+  font-weight: 400;
+  background: #373e51;
+}
+
+.modalFooter {
+  margin-top: 20px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.checkAndSaveBtn {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  background: #434c63;
+  box-shadow: 2px 8px 15px rgb(201 201 201 10%);
+  border: transparent;
+  border-radius: 7px;
+  color: #ffffff;
+  transition: 0.2s all linear;
+  height: 40px;
+  width: 250px;
+}
+
+.modalCloseBtn {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  background: #434c63;
+  box-shadow: 2px 8px 15px rgb(201 201 201 10%);
+  border: transparent;
+  border-radius: 7px;
+  color: #ffffff;
+  transition: 0.2s all linear;
+  height: 40px;
+  width: 100px;
+}
+
+.createObjectBtn {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+  background: #434c63;
+  box-shadow: 2px 8px 15px rgb(201 201 201 10%);
+  border: transparent;
+  border-radius: 7px;
+  color: #ffffff;
+  transition: 0.2s all linear;
+  width: 150px;
+}

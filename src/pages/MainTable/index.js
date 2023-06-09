@@ -25,7 +25,6 @@ function MainTable() {
   const defaultColDef = useMemo(() => {
     return {
       filter: 'agTextColumnFilter',
-      // floatingFilter: true,
       resizable: true,
     };
   }, []);
@@ -47,12 +46,10 @@ function MainTable() {
   }, []);
 
   const onGridReady = useCallback(() => {
-    // autoSizeAll(false);
     getWorkload(user.access_token).then((data) => {
       setRowData(data);
     });
-    autoSizeAll(false);
-  }, [autoSizeAll, user.access_token]);
+  }, [user.access_token]);
 
   const onCellEditingStarted = useCallback((event) => {
     console.log('cellEditingStarted');
@@ -70,9 +67,14 @@ function MainTable() {
     [user.access_token],
   );
 
+  const onFirstDataRendered = () => {
+    autoSizeAll(false);
+  };
+
   return (
     <div className="ag-theme-alpine" style={{ height: 600 }}>
       <AgGridReact
+        onFirstDataRendered={onFirstDataRendered}
         localeText={agGridRu}
         frameworkComponents={frameworkComponents}
         ref={gridRef}

@@ -8,17 +8,19 @@ export const tableHeaders = [
     },
   },
   { field: 'numberPlan', headerName: '№ плана' },
-  { field: 'numberSemestr', headerName: 'Семестр' },
+  { field: 'idSubject', headerName: 'Дисциплина', pinned: 'left' },
+  { field: 'idGroup', headerName: 'Группа', pinned: 'left' },
   { field: 'studyForm', headerName: 'Форма обучения' },
-  { field: 'idGroup', headerName: 'Группа' },
   {
     field: 'numberFlow',
     headerName: '№ потока',
     type: 'editableColumn',
-    cellEditor: 'cellEditor',
+    cellEditor: 'agTextCellEditor',
+    cellEditorParams: {
+      valueParser: (val) => (isNaN(val) ? null : Number(val)),
+    },
     // cellEditorPopup: true,
   },
-  { field: 'idSubject', headerName: 'Дисциплина' },
   {
     field: 'idDepartment',
     headerName: 'Кафедра',
@@ -32,6 +34,7 @@ export const tableHeaders = [
   },
   { field: 'idSpeciality', headerName: 'Специальность' },
   { field: 'course', headerName: 'Курс' },
+  { field: 'numberSemestr', headerName: 'Семестр' },
   { field: 'countStudenty', headerName: 'Студентов' },
   { field: 'countPodgroup', headerName: 'Количество подгрупп' },
   { field: 'lecture', headerName: 'Лекции' },
@@ -50,6 +53,12 @@ export const tableHeaders = [
   { field: 'diplomProekt', headerName: 'Дипломное проектирование' },
   { field: 'gek', headerName: 'ГЭК' },
   { field: 'otherRab', headerName: 'Прочие работы' },
+  {
+    field: 'field',
+    headerName: 'Прочее',
+    type: 'editableColumn',
+    cellEditor: 'agTextCellEditor',
+  },
 ];
 
 // export const fakeRowData = [

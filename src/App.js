@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Login from './pages/Login';
 import RequireAuth from './components/HOCs/RequireAuth';
+import MainTable from './pages/MainTable';
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
           path="main"
           element={
             <RequireAuth>
-              <div>MAIN PAGE</div>
+              <MainTable />
             </RequireAuth>
           }
         />

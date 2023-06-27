@@ -71,6 +71,15 @@ function MainTable() {
     autoSizeAll(false);
   };
 
+  function getRandomColor() {
+    let letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
   return (
     <div className="ag-theme-alpine" style={{ height: 600 }}>
       <AgGridReact
@@ -91,3 +100,22 @@ function MainTable() {
 }
 
 export default MainTable;
+
+// let arr = [{ number: 10 }, { number: 20 }, { number: 10 }, { number: 15 }];
+
+// let groups = arr.reduce((acc, obj) => {
+//   if (!acc[obj.number]) {
+//     acc[obj.number] = [];
+//   }
+//   acc[obj.number].push(obj);
+//   return acc;
+// }, {});
+
+// console.log(groups);
+
+// for (let number in groups) {
+//   console.log(`Обрабатываем группу с number = ${number}`);
+//   for (let obj of groups[number]) {
+//     console.log(obj);
+//   }
+// }

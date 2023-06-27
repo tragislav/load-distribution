@@ -7,7 +7,7 @@ export const tableHeaders = [
       onClick: (params) => params.node.setDataValue('data', params.data),
     },
   },
-  { field: 'numberPlan', headerName: '№ плана' },
+  // { field: 'numberPlan', headerName: '№ плана' },
   { field: 'idSubject', headerName: 'Дисциплина', pinned: 'left' },
   { field: 'idGroup', headerName: 'Группа', pinned: 'left' },
   { field: 'studyForm', headerName: 'Форма обучения' },
@@ -19,6 +19,9 @@ export const tableHeaders = [
     cellEditorParams: {
       valueParser: (val) => (isNaN(val) ? null : Number(val)),
     },
+    cellStyle: () => {
+      return { backgroundColor: 'darkseagreen' };
+    },
     // cellEditorPopup: true,
   },
   {
@@ -28,8 +31,29 @@ export const tableHeaders = [
     cellEditor: 'agRichSelectCellEditor',
     cellEditorPopup: true,
     cellEditorParams: {
-      values: ['ИСИТ', 'АПП'],
+      values: [
+        'ДМ',
+        'ин. яз.',
+        'ИСИТ',
+        'КиТОиО',
+        'МиИТ',
+        'менеджмент',
+        'СГД',
+        'ТРиТ',
+        'ТЭ',
+        'ТТМ',
+        'ФКиС',
+        'ФиКД',
+        'ЭиХТ',
+        'экономики',
+        'ЭТиМ',
+        'ТМ',
+        'АПП',
+      ],
       cellEditorPopup: true,
+    },
+    cellStyle: () => {
+      return { backgroundColor: 'lightblue' };
     },
   },
   { field: 'idSpeciality', headerName: 'Специальность' },

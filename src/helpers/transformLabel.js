@@ -1,5 +1,11 @@
 export function transformLabel(value) {
   switch (value) {
+    case 'lecture':
+      return 'Лекции';
+    case 'practice':
+      return 'Практики';
+    case 'laboratory':
+      return 'Лабораторные';
     case 'consultation':
       return 'Консультации';
     case 'ekzam':
